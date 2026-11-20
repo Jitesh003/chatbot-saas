@@ -1,7 +1,10 @@
 import { Hono } from "hono";
 import { Client } from "pg";
+import { chat } from "./chat";
 
 const app = new Hono<{ Bindings: Env }>();
+
+app.post("/api/chat", chat);
 
 app.get("/api/", (c) => c.json({ name: "Cloudflare" }));
 
