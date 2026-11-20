@@ -23,7 +23,11 @@
 	// Never put localConnectionString here: this file is public.
 	"hyperdrive": [
 		{ "binding": "HYPERDRIVE", "id": "0c0f5a55a5ec4bff897a9e620cfbe9ca" }
-	]
+	],
+	// Not secret. The Langfuse keys are Worker secrets (.dev.vars locally).
+	"vars": {
+		"LANGFUSE_BASE_URL": "https://us.cloud.langfuse.com"
+	}
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
