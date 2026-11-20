@@ -60,4 +60,12 @@ app.get("/api/health", async (c) => {
 	return c.json(body, body.groq === "ok" && body.db === "ok" ? 200 : 503);
 });
 
-export default app;
+// A Worker can have several entry points: fetch() for HTTP requests (Hono), scheduled() for Cron Triggers.
+export default {
+	fetch: app.fetch,
+	// Runs on the cron schedule in wrangler.json. One real query keeps the Supabase free project awake.
+	// If it throws, the run shows as failed under the Worker's cron events in the dashboard.
+	async scheduled(_controller, env, ctx) {
+		await checkDb(env.HYPERDRIVE, ctx);
+	},
+} satisfies ExportedHandler<Env>;

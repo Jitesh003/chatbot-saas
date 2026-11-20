@@ -27,6 +27,11 @@
 	// Not secret. The Langfuse keys are Worker secrets (.dev.vars locally).
 	"vars": {
 		"LANGFUSE_BASE_URL": "https://us.cloud.langfuse.com"
+	},
+	// Keep-alive: Supabase pauses free projects without "a few database requests each day".
+	// Every 6 hours (UTC) runs scheduled() in src/worker/index.ts.
+	"triggers": {
+		"crons": ["0 */6 * * *"]
 	}
 	/**
 	 * Smart Placement
